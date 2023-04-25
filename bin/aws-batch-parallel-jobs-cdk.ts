@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { AwsBatchParallelJobsCdkStack } from '../lib/aws-batch-parallel-jobs-cdk-stack';
+import { AwsBatchParallelJobsCdkStack } from '../lib/batch-job-stack';
 
 const app = new cdk.App();
 new AwsBatchParallelJobsCdkStack(app, 'AwsBatchParallelJobsCdkStack', {

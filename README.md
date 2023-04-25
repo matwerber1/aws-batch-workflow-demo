@@ -1,14 +1,28 @@
-# Welcome to your CDK TypeScript project
+# Parralelization and Job Dependencies with AWS Batch
 
-This is a blank project for CDK development with TypeScript.
+```sh
+#!/bin/bash
+set -e
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+cdk deploy --no-approval
 
-## Useful commands
+STACK_NAME=AwsBatchParallelJobsCdkStack
+outputs=$(aws cloudformation describe-stacks --stack-name $STACK_NAME --query 'Stacks[].Outputs[]' --output json)
+job_queue=$(echo $outputs | jq -r '.[] | select(.OutputKey == "CfnOutputBatchJobQueue") | .OutputValue')
+job_definition=$(echo $outputs | jq -r '.[] | select(.OutputKey == "CfnOutputBatchJobDefinition") | .OutputValue')
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+aws batch submit-job \
+    --job-name CLI-submission \
+    --job-queue $job_queue \
+    --job-definition $job_definition \
+    --container-overrides \
+        environment="[{name=JOB_TYPE,value=start},{name=TOTAL_FRAMES,value=120},{name=FRAMES_PER_RENDER_JOB,value=30}]"
+
+...
+
+...
+
+...
+
+
+// TODO: make sure ECS_AWSVPC_BLOCK_IMDS = true for ECS agent instance config
