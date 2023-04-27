@@ -1,5 +1,5 @@
 {
-  "app": "npx ts-node --prefer-ts-exts bin/aws-batch-parallel-jobs-cdk.ts",
+  "app": "npx ts-node --prefer-ts-exts bin/aws-batch-demo.ts",
   "watch": {
     "include": [
       "**"

@@ -8,5 +8,8 @@ node_modules
 cdk.out
 
 # Docker container's entry point
-!lib/images/**/*.js
+!lib/src/containers/**/*.js
 node_modules
+
+.DS_Store
+!.eslintrc.js
