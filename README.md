@@ -4,7 +4,7 @@ This project uses the AWS CDK to synthesize and deploy a CloudFormation stack th
 
 The architecture includes: 
 
-<img src="docs/diagram.png" width="350px"/>
+<img src="docs/diagram.png" width="450px"/>
 
 1. An AWS Batch job definition and job queue for each of three steps in the workflow: 
 
