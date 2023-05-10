@@ -4,6 +4,8 @@ This project uses the AWS CDK to synthesize and deploy a CloudFormation stack th
 
 The architecture includes: 
 
+![](docs/diagram.png)
+
 1. An AWS Batch job definition and job queue for each of three steps in the workflow: 
 
     1. **Plan** - determines how many frames to render, how many parallel rendering jobs are needed, and submit the rendering jobs to AWS batch; also submits a single encoding job that has a dependency on all rendering jobs completing for a given workflow. 
